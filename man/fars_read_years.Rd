@@ -27,8 +27,5 @@ This function calls make_file_name and fars_read.
 \examples{
 fars_read_years(c("2013", "2014")) -> success
 fars_read_years(c(2013, 2014)) -> success
-fars_read_years() -> error argument "years" is missing
-fars_read_years(c(2013, 1991)) -> Warning :
-not file associated to 1991, return NULL + df with only 2013
 
 }

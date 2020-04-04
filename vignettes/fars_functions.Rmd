@@ -22,5 +22,5 @@ library(roadAccidentsStudy)
 The package "roadAccidentStudy" is writing in R and uses some external packages like dlpyr, tidyr, maps or graphics.   
 This package contains a primitive study, produced by <a href="https://www.coursera.org/learn/r-packages/">coursera</a>, of car accidents in the USA.  
 You can see some tests in test/testthat/ directory.  
-You can see data in data repository.  
+You can see example data in inst/extdata repository.  
 The use of the fars functions are explained in the associated rd (go in the man directory or directly in the R code).

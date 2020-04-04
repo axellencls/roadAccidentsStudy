@@ -1,14 +1,15 @@
 Package: roadAccidentsStudy
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Study on the car accidents in the US
 Version: 0.1.0
-Author: person(Axelle)
+Author: Axelle
 Maintainer: The package maintainer <axelle@somewhere.net>
-Description: Study on the car accidents in the US
+Description: Read csv, extract data, plot accidents in USA with map.
 License: GPL
 Encoding: UTF-8
 LazyData: true
 Imports:
+  magrittr,
   readr,
   dplyr (>= 0.7.0),
   tidyr,

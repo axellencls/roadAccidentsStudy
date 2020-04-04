@@ -11,10 +11,6 @@
 #'Otherwize, it returns an error like "file '\code{filename}' doesn't
 #'exist".
 #'
-#'@examples
-#'fars_read("data/accdfident_2015.csv.bz2") -> error
-#'fars_read("data/accident_2015.csv.bz2") -> success
-#'
 #'@importFrom readr read_csv
 #'@importFrom dplyr tbl_df
 #'
@@ -27,7 +23,6 @@ fars_read <- function(filename) {
   })
   dplyr::tbl_df(data)
 }
-
 
 #'make_filename creates a dynamic filename with a year given in input.
 #'The filename appear like "accident_{year}.csv.bz2". This function is
@@ -43,12 +38,12 @@ fars_read <- function(filename) {
 #'@examples
 #'make_filename(2013)
 #'make_filename("2015")
-#'make_filename("imnotaninteger")
 #'
 #'@export
 make_filename <- function(year) {
   year <- as.integer(year)
-  sprintf("accident_%d.csv.bz2", year)
+  filename <- sprintf("accident_%d.csv.bz2", year)
+  system.file("extdata", filename, package = "roadAccidentsStudy")
 }
 
 
@@ -67,24 +62,22 @@ make_filename <- function(year) {
 #'@examples
 #'fars_read_years(c("2013", "2014")) -> success
 #'fars_read_years(c(2013, 2014)) -> success
-#'fars_read_years() -> error argument "years" is missing
-#'fars_read_years(c(2013, 1991)) -> Warning :
-#'not file associated to 1991, return NULL + df with only 2013
 #'
 #'@importFrom dplyr mutate select
 #'
 #'@export
 fars_read_years <- function(years) {
+  MONTH <- NULL
   lapply(years, function(year) {
-    file <- make_filename(year)
-    tryCatch({
-      dat <- fars_read(file)
-      dplyr::mutate(dat, year = year) %>%
-        dplyr::select(MONTH, year)
-    }, error = function(e) {
-      warning("invalid year: ", year)
-      return(NULL)
-    })
+  file <- make_filename(year)
+  tryCatch({
+    dat <- fars_read(file)
+    dplyr::mutate(dat, year = year) %>%
+    dplyr::select(MONTH, year)
+  }, error = function(e) {
+    warning("invalid year: ", year)
+    return(NULL)
+  })
   })
 }
 
@@ -101,19 +94,19 @@ fars_read_years <- function(years) {
 #'
 #'@examples
 #'fars_summarize_years(c(2014, 2015)) -> success
-#'fars_summarize_years(c(2014, 2016)) -> warning + df with only 2014 results
-#'fars_summarize_years() -> error argument "years" is missing
 #'
 #'@importFrom dplyr bind_rows group_by
 #'@importFrom tidyr spread
+#'@importFrom magrittr %>%
 #'
 #'@export
 fars_summarize_years <- function(years) {
+  year <- MONTH <- n <- NULL
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
-    dplyr::group_by(year, MONTH) %>%
-    dplyr::summarize(n = n()) %>%
-    tidyr::spread(year, n)
+  dplyr::group_by(year, MONTH) %>%
+  dplyr::summarize(n = dplyr::n()) %>%
+  tidyr::spread(year, n)
 }
 
 
@@ -131,9 +124,7 @@ fars_summarize_years <- function(years) {
 #'year in this state, return "no accidents to plot" and NULL value
 #'
 #'@examples
-#'fars_map_state(1, 2013) -> success
-#'fars_map_state(0, 2013) -> Error in fars_map_state(0, 2013) :
-#'invalid STATE number: 0
+#'fars_map_state(1, 2013)
 #'
 #'@importFrom dplyr filter
 #'@importFrom maps map
@@ -141,6 +132,7 @@ fars_summarize_years <- function(years) {
 #'
 #'@export
 fars_map_state <- function(state.num, year) {
+  STATE <- NULL
   filename <- make_filename(year)
   data <- fars_read(filename)
   state.num <- as.integer(state.num)
@@ -158,5 +150,5 @@ fars_map_state <- function(state.num, year) {
     maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
               xlim = range(LONGITUD, na.rm = TRUE))
     graphics::points(LONGITUD, LATITUDE, pch = 46)
-  })
+    })
 }

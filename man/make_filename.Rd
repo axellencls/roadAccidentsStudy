@@ -25,6 +25,5 @@ call in "fars_read_years".
 \examples{
 make_filename(2013)
 make_filename("2015")
-make_filename("imnotaninteger")
 
 }

@@ -26,8 +26,6 @@ of accidents for a given state number and for a given year. This
 function calls make_filename, fars_read.
 }
 \examples{
-fars_map_state(1, 2013) -> success
-fars_map_state(0, 2013) -> Error in fars_map_state(0, 2013) :
-invalid STATE number: 0
+fars_map_state(1, 2013)
 
 }

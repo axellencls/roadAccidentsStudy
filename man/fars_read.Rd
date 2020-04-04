@@ -20,8 +20,3 @@ By default, this function reads and converts a CSV file into a dataframe.
 It takes the CSV file as the only argument and it doesn't show the reading
 progress bar.
 }
-\examples{
-fars_read("data/accdfident_2015.csv.bz2") -> error
-fars_read("data/accident_2015.csv.bz2") -> success
-
-}

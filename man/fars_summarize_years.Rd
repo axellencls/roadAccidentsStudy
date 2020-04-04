@@ -23,7 +23,5 @@ fars_read_years.
 }
 \examples{
 fars_summarize_years(c(2014, 2015)) -> success
-fars_summarize_years(c(2014, 2016)) -> warning + df with only 2014 results
-fars_summarize_years() -> error argument "years" is missing
 
 }
