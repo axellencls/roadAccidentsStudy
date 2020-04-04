@@ -1,0 +1,26 @@
+---
+title: "fars_functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fars_functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(roadAccidentsStudy)
+```
+
+<h1>Hello !</h1>
+The package "roadAccidentStudy" is writing in R and uses some external packages like dlpyr, tidyr, maps or graphics.   
+This package contains a primitive study, produced by <a href="https://www.coursera.org/learn/r-packages/">coursera</a>, of car accidents in the USA.  
+You can see some tests in test/testthat/ directory.  
+You can see data in data repository.  
+The use of the fars functions are explained in the associated rd (go in the man directory or directly in the R code).

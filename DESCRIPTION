@@ -1,0 +1,21 @@
+Package: roadAccidentsStudy
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Author: person(Axelle)
+Maintainer: The package maintainer <axelle@somewhere.net>
+Description: Study on the car accidents in the US
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Imports:
+  readr,
+  dplyr (>= 0.7.0),
+  tidyr,
+  maps,
+  graphics
+RoxygenNote: 7.1.0
+Suggests: 
+    knitr,
+    testthat
+VignetteBuilder: knitr
